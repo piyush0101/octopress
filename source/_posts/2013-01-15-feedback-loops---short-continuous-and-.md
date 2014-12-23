@@ -6,7 +6,7 @@ category:
 tags: [feedback loops, feedback]
 ---
 
-I was working one friday afternoon at the **Thought**Works Dallas office, remoting into the machine at the client site and pairing with a fellow developer. Internet connection speeds here in the United States are pretty amazing and it did not take long to connect to the remote machine and start coding in eclipse. This has happened to me before but I never thought much about it. Even the slightest of lag between a keystroke and the letter appearing on the display is slow feedback. I personally am not a very accurate typist, I make errors while typing but constantly looking on the screen to see what I typed, getting instantaneous feedback on whether it was correct or not helps me in fixing the problem quickly. Imagine if there was a delay of a second in this scenario i.e. when you hit a key and when the letter appeared on the screen. How inconvenient would that have been. 
+I was working one friday afternoon at the ThoughtWorks Dallas office, remoting into the machine at the client site and pairing with a fellow developer. Internet connection speeds here in the United States are pretty amazing and it did not take long to connect to the remote machine and start coding in eclipse. This has happened to me before but I never thought much about it. Even the slightest of lag between a keystroke and the letter appearing on the display is slow feedback. I personally am not a very accurate typist, I make errors while typing but constantly looking on the screen to see what I typed, getting instantaneous feedback on whether it was correct or not helps me in fixing the problem quickly. Imagine if there was a delay of a second in this scenario i.e. when you hit a key and when the letter appeared on the screen. How inconvenient would that have been. 
 
 I am just curious and intrigued about the importance of efficient, streamlined feedback loops in our lives and professions. As a software developer, I have seen so many practices - [fail fast][FF] systems, fail fast techniques, fail fast language features, [continuous integration][CI], [continuous delivery][CD] and deployment, all of which have one common theme that they strive towards. Short and continuous feedbacks. Figuring out problems sooner than later, finding issues in smaller deltas rather than mining them in a sea of changes. Similar to software development, other activities in our daily lives become much less stressful and streamlined if we consider involving short, continuous and honest feedbacks. How? I know it sounds preposterous but I will explain all of it below.
 
@@ -34,7 +34,7 @@ Starting with a short example and then I will show a more complex scenario when 
 
 ![partial line coverage][partial]
 
-[partial]: ../../../../assets/images/partial-line-coverage.png
+[partial]: /images/partial-line-coverage.png
 
 Green is for 'full line coverage' while Yellow is for 'partial line coverage'. There's one line in the code above that is marked as yellow. It is not difficult to figure out why that line is partially covered. There is a branch in the code and it looks like that in our tests, we have covered only one branch. This screenshot is from IntelliJ using the built in IntelliJ code coverage tool. The emma eclipse plugin clearly said "1 branch out of 2 missed" along with highlighting the yellow line. In this particular instance, it does not look like an instant feedback is providing anything other than just **Staring** at you and asking to be fixed. "Sometimes staring at the code is better than using anything else".
 
@@ -42,7 +42,7 @@ Here is a slightly more complex example. You do not always get the pleasure of d
 
 ![partial line coverage subtle][partial-subtle]
 
-[partial-subtle]: ../../../../assets/images/partial-subtle.png
+[partial-subtle]: /images/partial-subtle.png
 
 I could not get as complex as I would have liked to but you can see the subtleties here. A boolean that is returned from inside the loop is also a default return value in case control does not go at all inside the for loop. This example is still simple but I have seen cases where multiple domain objects are involved in making decisions in a single method and that's when it is really hard to sense safety. I find these instant feedback given by these tools to be amazingly useful in those cases. It is easy to overlook branches and complex subtleties in your tests. Not because you are less smart, not because you are less careful, but only because you may not be getting short, continuous and honest feedbacks.
 
