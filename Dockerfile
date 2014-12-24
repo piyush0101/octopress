@@ -2,7 +2,7 @@ FROM ubuntu
 RUN apt-get update
 RUN apt-get install -y --force-yes git curl build-essential
 RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
-RUN apt-get install nodejs python -y --force-yes
+RUN apt-get install nodejs python nginx -y --force-yes
 RUN apt-get clean
 
 # Install rbenv and ruby-build
@@ -29,3 +29,11 @@ RUN git clone https://github.com/piyush0101/octopress
 WORKDIR ./octopress
 RUN bundle install
 RUN rake generate
+
+# Copy nginx configuration
+RUN /etc/init.d/nginx stop
+COPY config/nginx.conf /etc/nginx/sites-available/default
+
+# Copy generated files to /var/www/
+RUN mkdir -p /var/www/blog/public
+RUN cp -R public/* /var/www/blog/public/
