@@ -32,6 +32,7 @@ RUN rake generate
 
 # Copy nginx configuration
 RUN /etc/init.d/nginx stop
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY config/nginx.conf /etc/nginx/sites-available/default
 
 # Copy generated files to /var/www/
