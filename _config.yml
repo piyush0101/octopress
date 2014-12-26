@@ -2,13 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://threadfirst.com
+url: http://blog.threadfirst.com
 title: Développeur Philosophique
 subtitle: Software, Life and More
 author: Piyush Srivastava
 simple_search: https://www.google.com/search
 description:
-
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
 # http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
