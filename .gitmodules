@@ -1,3 +1,6 @@
 [submodule ".themes/MediumFox"]
 	path = .themes/MediumFox
 	url = https://github.com/sevenadrian/MediumFox
+[submodule ".themes/whitespace"]
+	path = .themes/whitespace
+	url = https://github.com/piyush0101/whitespace
