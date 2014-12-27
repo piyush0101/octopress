@@ -21,7 +21,13 @@ Here’s the tech stack that I ended up using:
 
 ## Octopress Development Environment
 
-First step was to setup a repeatable development environment where I could setup the blog using Octopress, make changes and get quick feedback. Since I was migrating my old blog to a new one, this was really important for me to check if the migration from old to new was working fine. Since I was ultimately going to host this blog inside a Docker container, I decided to setup a container with all the dependencies installed which I could take all the way to production. This worked out well but I would not recommend taking this approach. I will explain that a bit later in this article. My Docker container is based on an Ubuntu base box in which I am installing libraries required to run Octopress along with a few packages that I would use to serve blog content. Here’s the [Dockerfile][Dockerfile] for the same. Setting up a container in which I could clone my blog repository (which I forked from [Octopress’ Github repo][OctoGH]) and generate html content using a few `rake` commands proved to be extremely useful. For the development environment I used [Vagrant][Vagrant] to spin up a single node [CoreOS][CoreOS] VM. CoreOS is a very minimalist linux distro which comes pre loaded with Docker. This was pretty smooth, I could get a docker container with octopress setup running on my CoreOS VM in just a couple of hours. After that it was mostly fixing some minor issues in my old blog which were preventing it from migrating to octopress.
+First step was to setup a repeatable development environment where I could setup the blog using Octopress, make changes and get quick feedback. Since I was migrating my old blog to a new one, this was really important for me to check if the migration from old to new was working fine. Since I was ultimately going to host this blog inside a Docker container, I decided to setup a container with all the dependencies installed which I could take all the way to production. This worked out well but I would not recommend taking this approach. I will explain that a bit later in this article. My Docker container is based on an Ubuntu base box in which I am installing libraries required to run Octopress along with a few packages that I would use to serve blog content. 
+
+![vagrant coreos][vagrantcoreos]
+
+[vagrantcoreos]: /images/vagrant-coreos.png
+
+Here’s the [Dockerfile][Dockerfile] for the same. Setting up a container in which I could clone my blog repository (which I forked from [Octopress’ Github repo][OctoGH]) and generate html content using a few `rake` commands proved to be extremely useful. For the development environment I used [Vagrant][Vagrant] to spin up a single node [CoreOS][CoreOS] VM. CoreOS is a very minimalist linux distro which comes pre loaded with Docker. This was pretty smooth, I could get a docker container with octopress setup running on my CoreOS VM in just a couple of hours. After that it was mostly fixing some minor issues in my old blog which were preventing it from migrating to octopress.
 
         docker run -t -i piyush0101/octopress /bin/bash
 
@@ -35,6 +41,11 @@ My blog is a fork of the original Github repo for octopress. As with other syste
 * Build a docker container with the latest blog changes.
 * Push docker container to dockerhub.
 * Deploy the container on my hosting site.
+
+
+![blog pipeline][pipeline]
+
+[pipeline]: /images/blog-pipeline.png
 
 Except for the last stage, the pipeline is setup. I used [SnapCI][SnapCI] to configure the pipeline. Some of the pain points that I faced was SnapCI's lack of support for running docker builds. Luckily you can setup an [Automated Build][AutomatedBuild] repository at [Dockerhub][Dockerhub] on which builds can be triggered using a trigger URL. As of now I am just triggering a build from Snap with [curl][curl]. 
 
