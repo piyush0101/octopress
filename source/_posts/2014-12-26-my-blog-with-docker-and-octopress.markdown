@@ -47,11 +47,18 @@ My blog is a fork of the original Github repo for octopress. As with other syste
 
 [pipeline]: /images/blog-pipeline.png
 
-Except for the last stage, the pipeline is setup. I used [SnapCI][SnapCI] to configure the pipeline. Some of the pain points that I faced was SnapCI's lack of support for running docker builds. Luckily you can setup an [Automated Build][AutomatedBuild] repository at [Dockerhub][Dockerhub] on which builds can be triggered using a trigger URL. As of now I am just triggering a build from Snap with [curl][curl]. 
+I used [SnapCI][SnapCI] to configure the pipeline. Some of the pain points that I faced was SnapCI's lack of support for running docker builds. Luckily you can setup an [Automated Build][AutomatedBuild] repository at [Dockerhub][Dockerhub] on which builds can be triggered using a trigger URL. As of now I am just triggering a build from Snap with [curl][curl]. 
 
         curl --data "build=true" -X POST https://registry.hub.docker.com/u/piyush0101/octopress/trigger/token
 
 Problem with this is that this trigger is asynchronous. Trigger and Forget. I need to keep monitoring the build status on Dockerhub to see the status of the build. There is no status endpoint on Dockerhub which I can poll to get the status of the current build. Perhaps an endpoint that could return a json blob showing the status of a build would be useful. I can then hack a bash/python script to poll it every few seconds. Pipeline stage which triggers the Docker build finishes off in just a few seconds if the trigger alone is successful which is not enough to achieve a completely automated solution. I have also been thinking of perhaps executing a build over http and streaming the console output of the build to the client over a websocket. Client (SnapCI) should not return until the build finishes. This means that the Pipeline Stage which builds the docker container does not finish until the docker build finishes. This is exactly what I need.
+
+Well, instead of going in that complicated direction, I just ran a few commands over ssh from SnapCI for running docker builds. Docker builds are running on a DigitalOcean CoreOS droplet.
+
+        ssh -i my_private_key user@host.com rm -Rf octopress
+        ssh -i my_private_key user@host.com git clone https://github.com/piyush0101/octopress
+        ssh -i my_private_key user@host.com 'cd octopress && sudo docker build piyush0101/octopress .'
+
 
 ## Hosting
 
