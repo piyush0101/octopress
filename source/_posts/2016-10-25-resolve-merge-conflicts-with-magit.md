@@ -1,12 +1,3 @@
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgheadline1">Resolving Merge Conflicts with Magit</a></li>
-</ul>
-</div>
-</div>
-
 # Resolving Merge Conflicts with Magit<a id="orgheadline1"></a>
 
 I have been using magit for quite a while with my Emacs setup. Its a great
